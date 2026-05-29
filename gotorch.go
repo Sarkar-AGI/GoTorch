@@ -1,3 +1,10 @@
+// Copyright (c) 2024-2026 Sarkar-AGI
+// SPDX-License-Identifier: MIT
+//
+// GoTorch — Go binding for the PyTorch C++ engine (libtorch).
+// PyTorch is Copyright (c) Facebook, Inc. and its affiliates,
+// licensed under the BSD 3-Clause License. See LICENSE-PYTORCH.
+//
 // Package gotorch is the single-import entry point for GoTorch.
 //
 // Python:                              Go:
