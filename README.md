@@ -99,6 +99,27 @@ go run ./examples/text_classification/
 go run ./examples/image_classification/
 ```
 
+## benchmark Results
+
+cpu: Intel Xeon @ 2.80GHz  (1 core)
+
+┌─────────────────────────┬──────────────┬──────────┬───────────┐
+│ Benchmark               │ Time/op      │ Mem/op   │ Allocs/op │
+├─────────────────────────┼──────────────┼──────────┼───────────┤
+│ TensorAllocation        │  814 µs      │ 200 KB   │ 3         │
+│ MatMul 32×32            │   58 µs      │   4 KB   │ 3         │
+│ MatMul 64×512           │   28 ms      │ 128 KB   │ 3         │
+│ LinearForward (32×784)  │   10 ms      │  32 KB   │ 3         │
+│ MLPForward (32×784)     │   12 ms      │  97 KB   │ 13        │
+│ MLPForward Large(128×)  │  118 ms      │ 901 KB   │ 18        │
+│ FullTrainingStep        │   29 ms      │ 197 KB   │ 15        │
+│ ReLU (128×512)          │  358 µs      │ 256 KB   │ 1         │
+│ Softmax (64×1000)       │  1.25 ms     │ 256 KB   │ 2         │
+│ SGD Step                │  1.03 ms     │   0 B    │ 0         │ ← zero alloc!
+│ DataLoading (batch=64)  │   64 µs      │ 200 KB   │ 1         │
+│ EmbeddingLookup         │  147 µs      │ 800 KB   │ 1         │
+└─────────────────────────┴──────────────┴──────────┴───────────┘
+
 ## Python → Go cheatsheet
 
 | Python | Go |
